@@ -1,4 +1,4 @@
-BASE PARA EL BUSCAMINAS: Alejandro Crespo CObos
+BASE PARA EL BUSCAMINAS: Alejandro Crespo Cobos
 =========================
 
 En este programa se encuentra la base para el Buscaminas de Desarrollo de intefaces (DAM2).

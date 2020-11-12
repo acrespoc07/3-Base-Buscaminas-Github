@@ -142,6 +142,24 @@ public class VentanaPrincipal {
 	 * Método que inicializa todos los lísteners que necesita inicialmente el programa
 	 */
 	public void inicializarListeners(){
+		botonEmpezar.addActionListener((e)->{
+			//juego = getJuego();
+			juego.inicializarPartida();
+
+			for (int i = 0; i < botonesJuego.length; i++) {
+				for (int j = 0; j < botonesJuego[i].length; j++) {
+					panelesJuego[i][j].removeAll();
+					refrescarPantalla();
+					panelesJuego[i][j].add(botonesJuego[i][j]);
+					botonesJuego[i][j].setEnabled(true);
+				}
+			}
+			refrescarPantalla();
+			actualizarPuntuacion();
+
+
+		});
+		
 		//TODO
 	}
 	
@@ -160,6 +178,19 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarNumMinasAlrededor(int i , int j) {
 		//TODO
+		JLabel aux = new JLabel();
+		int numMinasAlrededor = juego.getMinasAlrededor(i, j);
+		panelesJuego[i][j].removeAll();
+		aux.setText(Integer.toString(numMinasAlrededor));
+
+		//Depende de las minas que haya, mi contador le dice al array que posicion coger y que color coge.
+		if(numMinasAlrededor > 0){
+			aux.setForeground(correspondenciaColores[numMinasAlrededor]);
+			panelesJuego[i][j].add(aux);
+		}
+
+
+
 	}
 	
 	

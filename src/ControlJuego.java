@@ -37,7 +37,8 @@ public class ControlJuego {
 	 */
 	public void inicializarPartida() {
 
-		//Por cada ciclo del bucle genero dos aleatorios y se los meto al tablero y en esas posiciones me pondrá una MINA.
+		// Por cada ciclo del bucle genero dos aleatorios y se los meto al tablero y en
+		// esas posiciones me pondrá una MINA.
 		for (int i = 0; i < 20; i++) {
 			Random random1 = new Random();
 			int r1 = random1.nextInt(10);
@@ -47,7 +48,6 @@ public class ControlJuego {
 			tablero[r1][r2] = MINA;
 
 		}
-		
 
 		// TODO: Repartir minas e inicializar puntaci�n. Si hubiese un tablero anterior,
 		// lo pongo todo a cero para inicializarlo.
@@ -58,7 +58,7 @@ public class ControlJuego {
 			for (int j = 0; j < tablero[i].length; j++) {
 				if (tablero[i][j] != MINA) {
 					tablero[i][j] = calculoMinasAdjuntas(i, j);
-					
+
 				}
 			}
 		}
@@ -77,21 +77,21 @@ public class ControlJuego {
 	private int calculoMinasAdjuntas(int i, int j) {
 		int contMinasAlrededor = 0;
 
-		int iInicial = Math.max(0, i -1);
-		int iFinal = Math.min(LADO_TABLERO-1, i + 1);
+		int iInicial = Math.max(0, i - 1);
+		int iFinal = Math.min(LADO_TABLERO - 1, i + 1);
 
-		int jInicial =  Math.max(0, j -1);
-		int jFinal = Math.min(LADO_TABLERO-1, j + 1);
+		int jInicial = Math.max(0, j - 1);
+		int jFinal = Math.min(LADO_TABLERO - 1, j + 1);
 
 		for (int vertical = iInicial; vertical <= iFinal; vertical++) {
 			for (int horizontal = jInicial; horizontal <= jFinal; horizontal++) {
-				if(tablero[vertical][horizontal] == MINA){
+				if (tablero[vertical][horizontal] == MINA) {
 					contMinasAlrededor++;
 				}
 			}
-			
+
 		}
-		
+
 		return contMinasAlrededor;
 	}
 
@@ -121,7 +121,12 @@ public class ControlJuego {
 	 *         minas.
 	 **/
 	public boolean esFinJuego() {
-		return false;
+		if (puntuacion == (LADO_TABLERO * LADO_TABLERO - MINAS_INICIALES)) {
+			return true;
+		} else { 
+			return false;
+		}
+
 	}
 
 	/**
@@ -149,7 +154,7 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
 	public int getMinasAlrededor(int i, int j) {
-		return 0;
+		return calculoMinasAdjuntas(i, j);
 	}
 
 	/**
@@ -158,7 +163,7 @@ public class ControlJuego {
 	 * @return Un entero con la puntuación actual
 	 */
 	public int getPuntuacion() {
-		return 0;
+		return puntuacion;
 	}
 
 }

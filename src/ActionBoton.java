@@ -11,7 +11,11 @@ import java.awt.event.ActionListener;
  */
 public class ActionBoton implements ActionListener{
 
-	
+	VentanaPrincipal v = new VentanaPrincipal();
+	ControlJuego juego = new ControlJuego();
+	private int i;
+	private int j;
+	private boolean porExplosion;
 
 	public ActionBoton() {
 		//TODO
@@ -23,6 +27,35 @@ public class ActionBoton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//TODO
+		for ( i = 0; i < v.botonesJuego.length; i++) {
+			for (j = 0; j < v.botonesJuego[i].length; j++) {
+				v.botonesJuego[i][j].addActionListener(new ActionListener(){
+					  int iLis = i;
+					  int jLis = j;
+
+					@Override
+					public void actionPerformed(ActionEvent e){
+						if (juego.abrirCasilla(iLis, jLis)) {
+							v.mostrarNumMinasAlrededor(iLis, jLis);
+							porExplosion = false;
+							v.mostrarFinJuego(porExplosion);
+							v.refrescarPantalla();
+							v.actualizarPuntuacion();
+
+
+						} else {
+							if(!juego.abrirCasilla(iLis, jLis)){
+								porExplosion = true;
+								v.mostrarFinJuego(porExplosion);
+							}
+							
+						}
+
+					}
+				});
+				
+			}
+		}
 	}
 
 }

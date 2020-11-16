@@ -18,6 +18,8 @@ import javax.swing.SwingConstants;
  * @author {Rellenar por el alumno}
  */
 public class VentanaPrincipal {
+	private ActionBoton botonesPanel;
+
 
 	//La ventana principal, en este caso, guarda todos los componentes:
 	JFrame ventana;
@@ -142,8 +144,9 @@ public class VentanaPrincipal {
 	 * Método que inicializa todos los lísteners que necesita inicialmente el programa
 	 */
 	public void inicializarListeners(){
+		// Listener del boton GO
 		botonEmpezar.addActionListener((e)->{
-			//juego = getJuego();
+	
 			juego.inicializarPartida();
 
 			for (int i = 0; i < botonesJuego.length; i++) {
@@ -160,7 +163,19 @@ public class VentanaPrincipal {
 
 		});
 		
-		//TODO
+		for (int i = 0; i < getJuego().LADO_TABLERO; i++) {
+			for (int j = 0; j < getJuego().LADO_TABLERO; j++) {
+				botonesJuego[i][j].addActionListener((e) -> {
+					new ActionBoton(this).actionPerformed(e);
+				});
+				
+			}
+		}
+
+		
+	
+		
+		
 	}
 	
 	
@@ -201,12 +216,32 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
 		//TODO
+		if(juego.esFinJuego()){
+			if((JOptionPane.showConfirmDialog(ventana, "Has gando!!\n¿Quieres Jugar de nuevo?","Fin de la partida", JOptionPane.YES_NO_OPTION)) == 0){// en el if comparo, si el JoptionPane es 0, es que le dio a si y si es 1, le dio a no.
+	
+			}
+			else{
+				// si le das a no se sale.
+			   ventana.dispose(); 
+			}
+		}
+		if(porExplosion){
+			if((JOptionPane.showConfirmDialog(ventana, "Ha explotado una mina\nPuntuacion: "+ pantallaPuntuacion.getText()+ "\n¿Quieres Jugar de nuevo?" +  JOptionPane.YES_NO_OPTION)) == 0){// en el if comparo, si el JoptionPane es 0, es que le dio a si y si es 1, le dio a no.
+			
+			}else{
+				// si le das a no se sale.
+			   ventana.dispose(); 
+			}
+
+		}
 	}
 
 	/**
 	 * Método que muestra la puntuación por pantalla.
 	 */
 	public void actualizarPuntuacion() {
+		//me voy a mi pantalla de puntuacion, y 
+		pantallaPuntuacion.setText(Integer.toString(juego.getPuntuacion()));
 		//TODO
 	}
 	

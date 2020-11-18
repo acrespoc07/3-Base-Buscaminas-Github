@@ -146,23 +146,15 @@ public class VentanaPrincipal {
 	public void inicializarListeners(){
 		// Listener del boton GO
 		botonEmpezar.addActionListener((e)->{
-	
-			juego.inicializarPartida();
 
-			for (int i = 0; i < botonesJuego.length; i++) {
-				for (int j = 0; j < botonesJuego[i].length; j++) {
-					panelesJuego[i][j].removeAll();
-					refrescarPantalla();
-					panelesJuego[i][j].add(botonesJuego[i][j]);
-					botonesJuego[i][j].setEnabled(true);
-				}
-			}
+			ventana.getContentPane().removeAll();
+			juego = new ControlJuego();
+			inicializarComponentes();
+			inicializarListeners();
 			refrescarPantalla();
-			actualizarPuntuacion();
-
 
 		});
-		
+
 		for (int i = 0; i < getJuego().LADO_TABLERO; i++) {
 			for (int j = 0; j < getJuego().LADO_TABLERO; j++) {
 				botonesJuego[i][j].addActionListener((e) -> {
@@ -192,17 +184,18 @@ public class VentanaPrincipal {
 	 * @param j: posición horizontal de la celda.
 	 */
 	public void mostrarNumMinasAlrededor(int i , int j) {
-		//TODO
+		
 		JLabel aux = new JLabel();
 		int numMinasAlrededor = juego.getMinasAlrededor(i, j);
 		panelesJuego[i][j].removeAll();
 		aux.setText(Integer.toString(numMinasAlrededor));
 
 		//Depende de las minas que haya, mi contador le dice al array que posicion coger y que color coge.
-		if(numMinasAlrededor > 0){
+	
 			aux.setForeground(correspondenciaColores[numMinasAlrededor]);
 			panelesJuego[i][j].add(aux);
-		}
+			refrescarPantalla();
+		
 
 
 
@@ -217,22 +210,15 @@ public class VentanaPrincipal {
 	public void mostrarFinJuego(boolean porExplosion) {
 		//TODO
 		if(juego.esFinJuego()){
-			if((JOptionPane.showConfirmDialog(ventana, "Has gando!!\n¿Quieres Jugar de nuevo?","Fin de la partida", JOptionPane.YES_NO_OPTION)) == 0){// en el if comparo, si el JoptionPane es 0, es que le dio a si y si es 1, le dio a no.
-	
-			}
-			else{
-				// si le das a no se sale.
-			   ventana.dispose(); 
+			if((JOptionPane.showConfirmDialog(ventana, "Has gando!!\n¿Quieres Jugar de nuevo?","Fin de la partida", JOptionPane.YES_NO_OPTION)) == JOptionPane.NO_OPTION){// en el if comparo, si el JoptionPane es 0, es que le dio a si y si es 1, le dio a no.
+				ventana.dispose(); // si le das a no se sale.
 			}
 		}
 		if(porExplosion){
-			if((JOptionPane.showConfirmDialog(ventana, "Ha explotado una mina\nPuntuacion: "+ pantallaPuntuacion.getText()+ "\n¿Quieres Jugar de nuevo?" +  JOptionPane.YES_NO_OPTION)) == 0){// en el if comparo, si el JoptionPane es 0, es que le dio a si y si es 1, le dio a no.
-			
-			}else{
-				// si le das a no se sale.
-			   ventana.dispose(); 
+			if((JOptionPane.showConfirmDialog(ventana, "Ha explotado una mina\nPuntuacion: "+ pantallaPuntuacion.getText()+ "\n¿Quieres Jugar de nuevo?" +  JOptionPane.YES_NO_OPTION)) == JOptionPane.NO_OPTION){// en el if comparo, si el JoptionPane es 0, es que le dio a si y si es 1, le dio a no.
+			// si le das a no se sale.
+			ventana.dispose(); 
 			}
-
 		}
 	}
 

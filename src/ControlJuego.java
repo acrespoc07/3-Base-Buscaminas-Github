@@ -16,7 +16,7 @@ public class ControlJuego {
 	final int LADO_TABLERO = 10;
 
 	private int[][] tablero;
-	private int puntuacion;
+	private int puntuacion = 0 ;
 
 	public ControlJuego() {
 		// Creamos el tablero:
@@ -106,7 +106,7 @@ public class ControlJuego {
 	 */
 	public boolean abrirCasilla(int i, int j) {
 		if (tablero[i][j] != MINA) {// Si No tiene mina
-			puntuacion++;
+			aumentarPuntuacion();
 			return true;
 		} else {// Si tiene mina
 			return false;
@@ -121,11 +121,8 @@ public class ControlJuego {
 	 *         minas.
 	 **/
 	public boolean esFinJuego() {
-		if (puntuacion == (LADO_TABLERO * LADO_TABLERO - MINAS_INICIALES)) {
-			return true;
-		} else { 
-			return false;
-		}
+
+		return (puntuacion == (LADO_TABLERO * LADO_TABLERO - MINAS_INICIALES));
 
 	}
 
@@ -165,5 +162,16 @@ public class ControlJuego {
 	public int getPuntuacion() {
 		return puntuacion;
 	}
+	public void setPuntuacion(int puntuacion) {
+		this.puntuacion = puntuacion;
+	}
+	public void aumentarPuntuacion(){
+		puntuacion++;
+		
+	}
+	public void reiniciarPuntuacion() {
+		this.puntuacion = 0;
+	}
+	
 
 }

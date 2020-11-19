@@ -20,8 +20,10 @@ public class ActionBoton implements ActionListener {
 	private boolean porExplosion;
 	private JButton aux = new JButton();
 
-	public ActionBoton(VentanaPrincipal v) {
+	public ActionBoton(VentanaPrincipal v, int i , int j ) {
 		this.v = v;
+		this.i = i;
+		this.j= j;
 		
 	}
 
@@ -30,11 +32,10 @@ public class ActionBoton implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		aux = (JButton) e.getSource();
-
+		/* aux = (JButton) e.getSource();
 		for (i = 0; i < v.getJuego().LADO_TABLERO; i++) {
-			for (j = 0; j < v.getJuego().LADO_TABLERO; j++) {
-				if (aux == v.botonesJuego[i][j]) {
+			for (j = 0; j < v.getJuego().LADO_TABLERO; j++) { */
+				/* if (aux == v.botonesJuego[i][j]) { */
 					if (v.juego.abrirCasilla(i, j)) {
 						v.mostrarNumMinasAlrededor(i, j);
 						porExplosion = false;
@@ -46,8 +47,8 @@ public class ActionBoton implements ActionListener {
 						v.mostrarFinJuego(porExplosion);
 
 					}
-				}
-			}
-		}
+				/* } */
+	/* 		}
+		} */
 	}
 }

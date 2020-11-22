@@ -126,7 +126,7 @@ public class ControlJuego {
 	}
 
 	/**
-	 * Método que pinta por pantalla toda la información del tablero, se utiliza
+	 * Método que pinta por pantalla toda la información del tablero , se utiliza
 	 * para depurar
 	 */
 	public void depurarTablero() {

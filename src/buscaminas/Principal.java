@@ -1,8 +1,9 @@
+package buscaminas;
 import java.awt.EventQueue;
 
 /**
  * Clase principal del Buscaminas
- * @author  {Rellenar por el alumno}
+ * @author  Alejandro Crespo Cobos
  *
  */
 public class Principal {

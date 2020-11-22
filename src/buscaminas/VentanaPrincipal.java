@@ -1,9 +1,9 @@
+package buscaminas;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,12 +16,12 @@ import javax.swing.SwingConstants;
 /**
  * Ventana principal del Buscaminas
  * 
- * @author {Rellenar por el alumno}
+ * @author Alejandro Crespo Cobos 
  */
 public class VentanaPrincipal {
-	private static final int SwingConsta = 0;
+	
 
-	private ActionBoton botonesPanel;
+	
 	private int i, j;
 
 	// La ventana principal, en este caso, guarda todos los componentes:
@@ -141,22 +141,22 @@ public class VentanaPrincipal {
 	}
 
 	/**
-	 * Método que inicializa todos los lísteners que necesita inicialmente el
+	 * Método que inicializar todos los lísteners que necesita inicialmente el
 	 * programa
 	 */
 	public void inicializarListeners() {
 		// Listener del boton GO
 		
 		botonEmpezar.addActionListener((e) -> {
-
-			ventana.getContentPane().removeAll();
-			juego = new ControlJuego();
-			inicializarComponentes();
+			//
+			ventana.getContentPane().removeAll();//Borramos todo lo que hay en el panel.
+			juego = new ControlJuego();//Creamos un nuevo tablero
+			inicializarComponentes();//Inicializamos lo componentes de la interfaz
 			inicializarListeners();
 			refrescarPantalla();
 
 		});
-
+		//Nos Recorremos todas las celdads del tablero y vamos introduciendo los listener en los botones. 
 		for (i = 0; i < getJuego().LADO_TABLERO; i++) {
 			for (j = 0; j < getJuego().LADO_TABLERO; j++) {
 				botonesJuego[i][j].addActionListener(new ActionBoton(this, i , j));	
@@ -176,14 +176,13 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarNumMinasAlrededor(int i, int j) {
 
-		JLabel aux = new JLabel();
-		int numMinasAlrededor = juego.getMinasAlrededor(i, j);
-		panelesJuego[i][j].removeAll();
-		aux.setText(Integer.toString(numMinasAlrededor));
-		aux.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel aux = new JLabel();//Creamos un nuevo JLabel
+		int numMinasAlrededor = juego.getMinasAlrededor(i, j);//Llenamos la variable
+		panelesJuego[i][j].removeAll();//Borramos todo lo que hay en el panel.
+		aux.setText(Integer.toString(numMinasAlrededor));//Cuando pinchas el boton saldra en JLabel con las minas de alrededor
+		aux.setHorizontalAlignment(SwingConstants.CENTER);//Que el texto salga centrado
 
-		// Depende de las minas que haya, mi contador le dice al array que posicion
-		// coger y que color coge.
+		// Depende de las minas que haya, mi contador le dice al array que posicion coger y que color coge.
 
 		aux.setForeground(correspondenciaColores[numMinasAlrededor]);
 		panelesJuego[i][j].add(aux);
@@ -242,7 +241,7 @@ public class VentanaPrincipal {
 	 * Método que muestra la puntuación por pantalla.
 	 */
 	public void actualizarPuntuacion() {
-		// me voy a mi pantalla de puntuacion, y
+		// me voy a mi pantalla de puntuacion, y y actualizo el valor Puntuacion
 		pantallaPuntuacion.setText(Integer.toString(juego.getPuntuacion()));
 		// TODO
 	}
